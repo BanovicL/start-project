@@ -1,0 +1,155 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue: rgb(69, 69, 242);
+    --blue-hover: rgb(51, 51, 243);
+    --transition: all 0.3s ease;
+}
+
+body {
+    display: flex;
+}
+
+.page-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.sidebar {
+    border-right: 1px solid lightgray;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 5px 10px;
+}
+
+.sidebar-title {
+    text-align: center;
+}
+
+.cta-button {
+    padding: 8px;
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--blue);
+    color: white;
+    border-radius: 6px;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid var(--blue);
+}
+
+.cta-button:hover {
+    background-color: var(--blue-hover);
+}
+
+.outline-button {
+    border: 1px solid var(--blue);
+    background-color: white;
+    color: var(--blue);
+    padding: 8px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.employee-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+}
+
+.employee-list li a {
+    display: block;
+    text-decoration: none;
+    padding: 7px;
+    width: 100%;
+    color: rgb(38, 38, 38);
+}
+
+.employee-list li a:hover {
+    background-color: rgb(248, 248, 248);
+}
+
+.new-employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-employee-form input {
+    padding: 8px;
+    border: 1px solid rgb(147, 145, 145);
+    border-radius: 3px;
+}
+
+.new-employee-form input:focus {
+    outline: 1px solid var(--blue);
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.new-employee-form {
+    width: 250px;
+}
+
+.new-employee-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.new-employee-form .form-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.new-employee-form .form-buttons > *  {
+    flex: 1;
+}
+
+.employee {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+}
+
+.employee h1 {
+    text-align: center;
+}
+
+.employee-info {
+    margin-bottom: 10px;
+}
+
+.employee-info label {
+    font-weight: bold;
+}
+
+.employee .buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.employee .buttons > * {
+    flex: 1;
+}
