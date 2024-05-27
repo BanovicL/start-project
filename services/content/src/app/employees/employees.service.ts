@@ -1,62 +1,52 @@
 import { Injectable } from '@nestjs/common';
+import { CreateEmployeeInput } from './dto/employee-update-input';
 import { Employee } from './models/employees.model';
+import { EmployeeEntry } from './dto/EmployeeEntry';
+import EmployeeClient from '../sdk/employeeClient';
+import convertEntry from '../utils/convertEntry';
+import { HttpService } from '@nestjs/axios';
+import { API_BASE_URL, API_KEY, MANAGEMENT_TOKEN } from '../contants/content-stack';
 
 @Injectable()
 export class EmployeesService {
 
-    employees = [
-        {
-          id: "fsdlvzxcv",
-          firstName: "John",
-          lastName: "Doe",
-          position: "Software Engineer",
-          email: "john.doe@example.com",
-          address: "123 Main St, Anytown, USA"
-        },
-        {
-          id: "12dfasg",
-          firstName: "Jane",
-          lastName: "Smith",
-          position: "Project Manager",
-          email: "jane.smith@example.com",
-          address: "456 Oak St, Anytown, USA"
-        },
-        {
-          id: "fsd17tf",
-          firstName: "Bob",
-          lastName: "Johnson",
-          position: "Data Analyst",
-          email: "bob.johnson@example.com",
-          address: "789 Pine St, Anytown, USA"
-        },
-      ];
+    constructor(private readonly httpService: HttpService) {}
 
-    async createEmployee(data: Employee): Promise<Employee[]> {
-        this.employees.push(data);
-        return this.employees;
+    async createEmployee(data: CreateEmployeeInput): Promise<Employee> {
+        try {
+            const newEntry = await EmployeeClient.createEmployee(data);
+            return convertEntry(newEntry);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     async findAll(): Promise<Employee[]> {
-        return this.employees;
+        const allEmployees = await EmployeeClient.findAll();
+        return allEmployees.map(employee => convertEntry(employee));
     }
 
     async findOne(id: string): Promise<Employee> {
-        return this.employees.find(employee => employee.id === id);
+        const employee = await EmployeeClient.findOne(id);
+        return convertEntry(employee);
     }
 
-    async updateEmployee(newData: Employee): Promise<Employee>{
-        this.employees = this.employees.map((employee) => {
-            if(employee.id === newData.id){
-                employee = { ...newData }
-            }
-            return employee
-        })
-        return this.employees.find(employee => employee.id === newData.id);
+    async updateEmployee(newData: Employee){
+        try {
+            const result = await EmployeeClient.updateOne(newData)
+            return convertEntry(result);
+        } catch (err) {
+            console.error("Failed to update employee (service)", err);
+        }
     }
 
-    async deleteEmployee(id: string): Promise<Boolean> {
-        this.employees = this.employees.filter(employee => employee.id != id);
-        return true;
+    async deleteEmployee(id: string){
+        try {
+            const result = await EmployeeClient.deleteOne(id);
+            return result ? true : false;
+        } catch (err) {
+            console.error("Failed to delete entry.", err);
+        }
     }
 
 }
