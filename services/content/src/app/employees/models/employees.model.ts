@@ -5,9 +5,9 @@ export class Employee {
     @Field()
     id: string;
     @Field()
-    firstName: string;
+    firstname: string;
     @Field()
-    lastName: string;
+    lastname: string;
     @Field()
     position: string;
     @Field()

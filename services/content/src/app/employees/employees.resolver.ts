@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { Employee } from './models/employees.model';
 import { EmployeesService } from './employees.service';
-import { UpdateEmployeeInput } from './dto/employee-update-input';
+import { UpdateEmployeeInput, CreateEmployeeInput } from './dto/employee-update-input';
 
 @Resolver(of => Employee)
 export class EmployeesResolver {
@@ -17,9 +17,11 @@ export class EmployeesResolver {
         return this.employeeService.findOne(id);
     }
 
-    @Mutation(returns => [Employee])
-    async createEmployee(@Args('data') data: UpdateEmployeeInput) {
-        return this.employeeService.createEmployee(data);
+    @Mutation(returns => Employee)
+    async createEmployee(@Args('data') data: CreateEmployeeInput) {
+        const newEmployee = await this.employeeService.createEmployee(data);
+        console.log(newEmployee);
+        return newEmployee;
     }
 
     @Mutation(returns => Employee)
@@ -29,7 +31,12 @@ export class EmployeesResolver {
 
     @Mutation(returns => Boolean)
     async deleteEmployee(@Args('id') employeeId: string) {
-        return this.employeeService.deleteEmployee(employeeId);
+        try {
+            const result = await this.employeeService.deleteEmployee(employeeId);
+            return result;
+        } catch (err) {
+            console.error("Failed to delete employee gql", err);
+        }
     }
 
 }
