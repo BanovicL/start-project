@@ -3,7 +3,6 @@ import { Link, NavLink } from "@remix-run/react";
 import type { IEmployee } from "./types/employee";
 
 export default function Sidebar({ employees } : { employees: IEmployee[] }) {
-    console.log(employees);
     return (
         <nav className="sidebar">
             <h2 className="sidebar-title"><NavLink to={"/"}>Employees</NavLink></h2>
