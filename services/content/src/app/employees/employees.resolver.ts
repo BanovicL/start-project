@@ -20,7 +20,6 @@ export class EmployeesResolver {
     @Mutation(returns => Employee)
     async createEmployee(@Args('data') data: CreateEmployeeInput) {
         const newEmployee = await this.employeeService.createEmployee(data);
-        console.log(newEmployee);
         return newEmployee;
     }
 
