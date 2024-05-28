@@ -12,7 +12,7 @@ export default function Sidebar({ employees } : { employees: IEmployee[] }) {
             <ul className="employee-list">
                 {
                     employees?.map((employee: IEmployee) => {
-                        return <li><NavLink to={`/employee/${employee.id}`}>{employee.firstname} {employee.lastname}</NavLink></li>
+                        return <li data-testid="employee-link"><NavLink to={`/employee/${employee.id}`}>{employee.firstname} {employee.lastname}</NavLink></li>
                     })
                 }
             </ul>

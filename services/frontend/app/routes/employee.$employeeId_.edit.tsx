@@ -39,23 +39,23 @@ export default function EditEmployee() {
 
                 <div className="input-field">
                     <label htmlFor="firstName">First name</label>
-                    <input defaultValue={emloyee?.firstname} id="firstName" type="text" name="firstname" placeholder="First name..." />
+                    <input data-testid="firstname" defaultValue={emloyee?.firstname} id="firstName" type="text" name="firstname" placeholder="First name..." />
                 </div>
                 <div className="input-field">
                     <label htmlFor="lastName">Last name</label>
-                    <input defaultValue={emloyee?.lastname} id="lastName" type="text" name="lastname" placeholder="Last name..." />
+                    <input data-testid="lastname" defaultValue={emloyee?.lastname} id="lastName" type="text" name="lastname" placeholder="Last name..." />
                 </div>
                 <div className="input-field">
                     <label htmlFor="position">Job position</label>
-                    <input defaultValue={emloyee?.position} id="position" type="text" name="position" placeholder="Position..." />
+                    <input data-testid="position" defaultValue={emloyee?.position} id="position" type="text" name="position" placeholder="Position..." />
                 </div>
                 <div className="input-field">
                     <label htmlFor="email">Email</label>
-                    <input defaultValue={emloyee?.email} id="email" type="text" name="email" placeholder="Email..." />
+                    <input data-testid="email" defaultValue={emloyee?.email} id="email" type="text" name="email" placeholder="Email..." />
                 </div>
                 <div className="input-field">
                     <label htmlFor="adress">Address</label>
-                    <input defaultValue={emloyee?.address} id="adress" type="text" name="address" placeholder="Address..." />
+                    <input data-testid="address" defaultValue={emloyee?.address} id="adress" type="text" name="address" placeholder="Address..." />
                 </div>
 
                 <div className="form-buttons">
