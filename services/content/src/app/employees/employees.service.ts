@@ -18,17 +18,28 @@ export class EmployeesService {
             return convertEntry(newEntry);
         } catch (err) {
             console.error(err);
+            return null;
         }
     }
 
     async findAll(): Promise<Employee[]> {
-        const allEmployees = await EmployeeClient.findAll();
-        return allEmployees.map(employee => convertEntry(employee));
+        try {
+            const allEmployees = await EmployeeClient.findAll();
+            return allEmployees.map(employee => convertEntry(employee));
+        } catch (err) {
+            console.error("Failed to find all employees (service)", err);
+            return null;
+        }
     }
 
     async findOne(id: string): Promise<Employee> {
-        const employee = await EmployeeClient.findOne(id);
-        return convertEntry(employee);
+        try{
+            const employee = await EmployeeClient.findOne(id);
+            return convertEntry(employee);
+        } catch (err) {
+            console.error("Failed to find one employee (service)", err);
+            return null;
+        }
     }
 
     async updateEmployee(newData: Employee){
@@ -46,6 +57,7 @@ export class EmployeesService {
             return result ? true : false;
         } catch (err) {
             console.error("Failed to delete entry.", err);
+            return null;
         }
     }
 

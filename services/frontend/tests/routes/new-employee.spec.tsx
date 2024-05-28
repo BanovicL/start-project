@@ -1,7 +1,10 @@
 import { createRemixStub } from '@remix-run/testing';
-import { render, screen, waitFor, fireEvent, queryAllByText } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import Index from 'services/frontend/app/routes/_index';
 import NewEmployee from 'services/frontend/app/routes/new-employee';
+import { installGlobals } from '@remix-run/node';
+
+installGlobals();
 
 test('renders new employee form', async () => {
     const RemixStub = createRemixStub([
@@ -14,16 +17,15 @@ test('renders new employee form', async () => {
             Component: Index
         }
     ])
-    const { queryAllByLabelText, queryAllByText } = render(<RemixStub />);
 
-    expect(queryAllByLabelText(/First name/i)).toBeTruthy();
-    expect(queryAllByLabelText(/Last name/i)).toBeTruthy();
-    expect(queryAllByLabelText(/Job position/i)).toBeTruthy();
-    expect(queryAllByLabelText(/Email/i)).toBeTruthy();
-    expect(queryAllByLabelText(/Address/i)).toBeTruthy();
+    await act(() => {
+        render(<RemixStub initialEntries={['/new-employee']} />);
+    });
 
-    expect(queryAllByText(/Add employee/i)).toBeTruthy();
-    expect(queryAllByText(/Cancel/i)).toBeTruthy();
+    await screen.findAllByText("Add employee");
+
+    expect(screen.findAllByText("Add employee")).toBeTruthy();
+    
 });
 
 

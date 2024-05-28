@@ -21,19 +21,19 @@ export default function Employee() {
                 <div className="employee-data">
                     <div className="employee-info">
                         <label>Full name</label>
-                        <p>{ employee.firstname } { employee.lastname }</p>
+                        <p data-testid="employee-name">{ employee.firstname } { employee.lastname }</p>
                     </div>
                     <div className="employee-info">
                         <label>Job position</label>
-                        <p>{ employee.position }</p>
+                        <p data-testid="employee-position">{ employee.position }</p>
                     </div>
                     <div className="employee-info">
                         <label>Email</label>
-                        <p>{ employee.email }</p>
+                        <p data-testid="employee-email">{ employee.email }</p>
                     </div>
                     <div className="employee-info">
                         <label>Adress</label>
-                        <p>{ employee.address }</p>
+                        <p data-testid="employee-address">{ employee.address }</p>
                     </div>
                 </div>
 
